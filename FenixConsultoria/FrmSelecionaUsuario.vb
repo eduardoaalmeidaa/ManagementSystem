@@ -290,7 +290,7 @@ Public Class FrmSelecionaUsuario
             'PEGAR CAMPO EMAIL SEM ESTAR CONCATENADO COM O DOMINIO
             Dim domainEmail As String = DgUsuario.CurrentRow.Cells(4).Value.ToString()
             If domainEmail.Contains("@") Then
-                Dim email() As String = domainEmail.Split("@"c)
+                Dim email() As String = domainEmail.Split("@")
                 If email.Length > 0 Then
                     TxtEmail.Text = email(0)
                 End If
@@ -344,7 +344,12 @@ Public Class FrmSelecionaUsuario
     End Sub
 
     Private Sub BtnLimpar_Click(sender As Object, e As EventArgs) Handles BtnLimpar.Click
-        Limpar()
+        Try
+            Limpar()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub BtnVoltar_Click(sender As Object, e As EventArgs) Handles BtnVoltar.Click
